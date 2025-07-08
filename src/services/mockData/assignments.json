@@ -4,6 +4,7 @@
     "title": "Math Quiz Chapter 1",
     "category": "Quiz",
     "totalPoints": 100,
+    "weight": 15,
     "dueDate": "2024-09-15",
     "description": "Quiz covering linear equations and basic algebra concepts"
   },
@@ -12,6 +13,7 @@
     "title": "Science Lab Report",
     "category": "Project",
     "totalPoints": 150,
+    "weight": 20,
     "dueDate": "2024-09-22",
     "description": "Lab report on chemical reactions and observations"
   },
@@ -20,6 +22,7 @@
     "title": "History Essay",
     "category": "Homework",
     "totalPoints": 100,
+    "weight": 25,
     "dueDate": "2024-09-25",
     "description": "Essay on World War II causes and effects"
   },
@@ -28,6 +31,7 @@
     "title": "English Presentation",
     "category": "Project",
     "totalPoints": 200,
+    "weight": 20,
     "dueDate": "2024-10-01",
     "description": "Presentation on Shakespeare's Romeo and Juliet"
   },
@@ -36,6 +40,7 @@
     "title": "Math Homework Set 3",
     "category": "Homework",
     "totalPoints": 50,
+    "weight": 25,
     "dueDate": "2024-10-05",
     "description": "Practice problems on quadratic equations"
   },
@@ -44,6 +49,7 @@
     "title": "Science Midterm",
     "category": "Test",
     "totalPoints": 200,
+    "weight": 35,
     "dueDate": "2024-10-10",
     "description": "Comprehensive test covering first quarter material"
   },
@@ -52,6 +58,7 @@
     "title": "Class Participation",
     "category": "Participation",
     "totalPoints": 75,
+    "weight": 5,
     "dueDate": "2024-10-15",
     "description": "Daily participation and engagement in class discussions"
   },
@@ -60,6 +67,7 @@
     "title": "Literature Analysis",
     "category": "Homework",
     "totalPoints": 100,
+    "weight": 25,
     "dueDate": "2024-10-20",
     "description": "Analysis of themes in To Kill a Mockingbird"
   }

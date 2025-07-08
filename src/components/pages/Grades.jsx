@@ -207,9 +207,9 @@ const Grades = () => {
                               <ApperIcon name="Trash2" className="w-3 h-3" />
                             </button>
                           </div>
-                        </div>
+</div>
                         <div className="text-xs text-gray-400">
-                          {assignment.totalPoints} pts
+                          {assignment.totalPoints} pts • {assignment.weight}%
                         </div>
                         <Badge variant="info" size="sm">
                           {assignment.category}
@@ -223,15 +223,23 @@ const Grades = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {students.map((student, index) => {
+{students.map((student, index) => {
                   const studentGrades = grades.filter(g => g.studentId === student.Id)
-                  const totalPoints = studentGrades.reduce((sum, grade) => {
+                  
+                  // Calculate weighted average
+                  let weightedSum = 0
+                  let totalWeight = 0
+                  
+                  studentGrades.forEach(grade => {
                     const assignment = assignments.find(a => a.Id === grade.assignmentId)
-                    return sum + (assignment ? assignment.totalPoints : 0)
-                  }, 0)
-                  const totalScore = studentGrades.reduce((sum, grade) => sum + grade.score, 0)
-                  const average = totalPoints > 0 ? ((totalScore / totalPoints) * 100).toFixed(1) : 0
-
+                    if (assignment && assignment.weight) {
+                      const percentage = (grade.score / assignment.totalPoints) * 100
+                      weightedSum += percentage * (assignment.weight / 100)
+                      totalWeight += assignment.weight / 100
+                    }
+                  })
+                  
+                  const weightedAverage = totalWeight > 0 ? (weightedSum / totalWeight).toFixed(1) : 0
                   return (
                     <motion.tr
                       key={student.Id}
@@ -297,15 +305,20 @@ const Grades = () => {
                           </td>
                         )
                       })}
-                      <td className="px-4 py-4 text-center">
-                        <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                          average >= 90 ? 'grade-a text-white' :
-                          average >= 80 ? 'grade-b text-white' :
-                          average >= 70 ? 'grade-c text-white' :
-                          average >= 60 ? 'grade-d text-white' :
-                          'grade-f text-white'
-                        }`}>
-                          {average}%
+<td className="px-4 py-4 text-center">
+                        <div className="space-y-1">
+                          <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                            weightedAverage >= 90 ? 'grade-a text-white' :
+                            weightedAverage >= 80 ? 'grade-b text-white' :
+                            weightedAverage >= 70 ? 'grade-c text-white' :
+                            weightedAverage >= 60 ? 'grade-d text-white' :
+                            'grade-f text-white'
+                          }`}>
+                            {weightedAverage}%
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            Weighted
+                          </div>
                         </div>
                       </td>
                     </motion.tr>

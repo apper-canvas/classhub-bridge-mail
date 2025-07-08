@@ -10,12 +10,13 @@ const AssignmentForm = ({ assignment = null, onClose, onSuccess }) => {
     title: assignment?.title || '',
     category: assignment?.category || '',
     totalPoints: assignment?.totalPoints || '',
+    weight: assignment?.weight || '',
     dueDate: assignment?.dueDate || '',
     description: assignment?.description || '',
   })
   const [loading, setLoading] = useState(false)
 
-  const categoryOptions = [
+const categoryOptions = [
     { value: '', label: 'Select Category' },
     { value: 'Homework', label: 'Homework' },
     { value: 'Quiz', label: 'Quiz' },
@@ -24,25 +25,40 @@ const AssignmentForm = ({ assignment = null, onClose, onSuccess }) => {
     { value: 'Participation', label: 'Participation' },
   ]
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+  const categoryWeights = {
+    'Homework': 25,
+    'Quiz': 15,
+    'Test': 35,
+    'Project': 20,
+    'Participation': 5
   }
-
+const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => {
+      const updated = {
+        ...prev,
+        [name]: value
+      }
+      
+      // Auto-set weight based on category selection
+      if (name === 'category' && value && categoryWeights[value]) {
+        updated.weight = categoryWeights[value]
+      }
+      
+      return updated
+    })
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
 
-    try {
+try {
       const data = {
         ...formData,
         totalPoints: parseInt(formData.totalPoints),
+        weight: parseFloat(formData.weight),
         dueDate: new Date(formData.dueDate).toISOString().split('T')[0],
       }
-
       if (assignment) {
         await assignmentService.update(assignment.Id, data)
         toast.success('Assignment updated successfully!')
@@ -69,7 +85,7 @@ const AssignmentForm = ({ assignment = null, onClose, onSuccess }) => {
         required
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Select
           label="Category"
           name="category"
@@ -86,8 +102,19 @@ const AssignmentForm = ({ assignment = null, onClose, onSuccess }) => {
           onChange={handleChange}
           required
         />
+        <Input
+          label="Weight (%)"
+          name="weight"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          value={formData.weight}
+          onChange={handleChange}
+          placeholder="e.g., 25"
+          required
+        />
       </div>
-
       <Input
         label="Due Date"
         name="dueDate"

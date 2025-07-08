@@ -19,8 +19,14 @@ class AssignmentService {
     return { ...assignment }
   }
 
-  async create(assignmentData) {
+async create(assignmentData) {
     await this.delay(400)
+    
+    // Validate weight
+    if (assignmentData.weight < 0 || assignmentData.weight > 100) {
+      throw new Error('Weight must be between 0 and 100')
+    }
+    
     const newAssignment = {
       ...assignmentData,
       Id: Math.max(...this.assignments.map(a => a.Id)) + 1
@@ -29,8 +35,14 @@ class AssignmentService {
     return { ...newAssignment }
   }
 
-  async update(id, assignmentData) {
+async update(id, assignmentData) {
     await this.delay(400)
+    
+    // Validate weight if provided
+    if (assignmentData.weight !== undefined && (assignmentData.weight < 0 || assignmentData.weight > 100)) {
+      throw new Error('Weight must be between 0 and 100')
+    }
+    
     const index = this.assignments.findIndex(a => a.Id === id)
     if (index === -1) {
       throw new Error('Assignment not found')
