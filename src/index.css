@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F9FAFB;
+  color: #111827;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Toast Customization */
+.Toastify__toast-container {
+  width: 350px;
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  min-height: 64px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: white;
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: white;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Skeleton Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Grade Score Colors */
+.grade-a { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+.grade-b { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); }
+.grade-c { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+.grade-d { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+.grade-f { background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%); }
+
+/* Attendance Status Colors */
+.attendance-present { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+.attendance-absent { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+.attendance-late { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+.attendance-excused { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); }
+
+/* Table Hover Effects */
+.table-row:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+  transition: all 200ms ease-out;
+}
+
+/* Form Focus Effects */
+.form-input:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Card Hover Effects */
+.card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 200ms ease-out;
+}
+
+/* Gradient Text Effects */
+.gradient-text {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Success Animation */
+@keyframes fadeInSuccess {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-animation {
+  animation: fadeInSuccess 200ms ease-out;
+}

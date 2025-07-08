@@ -1,0 +1,66 @@
+[
+  {
+    "Id": 1,
+    "title": "Math Quiz Chapter 1",
+    "category": "Quiz",
+    "totalPoints": 100,
+    "dueDate": "2024-09-15",
+    "description": "Quiz covering linear equations and basic algebra concepts"
+  },
+  {
+    "Id": 2,
+    "title": "Science Lab Report",
+    "category": "Project",
+    "totalPoints": 150,
+    "dueDate": "2024-09-22",
+    "description": "Lab report on chemical reactions and observations"
+  },
+  {
+    "Id": 3,
+    "title": "History Essay",
+    "category": "Homework",
+    "totalPoints": 100,
+    "dueDate": "2024-09-25",
+    "description": "Essay on World War II causes and effects"
+  },
+  {
+    "Id": 4,
+    "title": "English Presentation",
+    "category": "Project",
+    "totalPoints": 200,
+    "dueDate": "2024-10-01",
+    "description": "Presentation on Shakespeare's Romeo and Juliet"
+  },
+  {
+    "Id": 5,
+    "title": "Math Homework Set 3",
+    "category": "Homework",
+    "totalPoints": 50,
+    "dueDate": "2024-10-05",
+    "description": "Practice problems on quadratic equations"
+  },
+  {
+    "Id": 6,
+    "title": "Science Midterm",
+    "category": "Test",
+    "totalPoints": 200,
+    "dueDate": "2024-10-10",
+    "description": "Comprehensive test covering first quarter material"
+  },
+  {
+    "Id": 7,
+    "title": "Class Participation",
+    "category": "Participation",
+    "totalPoints": 75,
+    "dueDate": "2024-10-15",
+    "description": "Daily participation and engagement in class discussions"
+  },
+  {
+    "Id": 8,
+    "title": "Literature Analysis",
+    "category": "Homework",
+    "totalPoints": 100,
+    "dueDate": "2024-10-20",
+    "description": "Analysis of themes in To Kill a Mockingbird"
+  }
+]

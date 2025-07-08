@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "firstName": "Emma",
+    "lastName": "Johnson",
+    "grade": "10th",
+    "email": "emma.johnson@email.com",
+    "phone": "(555) 123-4567",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 2,
+    "firstName": "Liam",
+    "lastName": "Williams",
+    "grade": "10th",
+    "email": "liam.williams@email.com",
+    "phone": "(555) 234-5678",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 3,
+    "firstName": "Olivia",
+    "lastName": "Brown",
+    "grade": "10th",
+    "email": "olivia.brown@email.com",
+    "phone": "(555) 345-6789",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 4,
+    "firstName": "Noah",
+    "lastName": "Davis",
+    "grade": "10th",
+    "email": "noah.davis@email.com",
+    "phone": "(555) 456-7890",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 5,
+    "firstName": "Ava",
+    "lastName": "Miller",
+    "grade": "10th",
+    "email": "ava.miller@email.com",
+    "phone": "(555) 567-8901",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 6,
+    "firstName": "Lucas",
+    "lastName": "Wilson",
+    "grade": "10th",
+    "email": "lucas.wilson@email.com",
+    "phone": "(555) 678-9012",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 7,
+    "firstName": "Sophia",
+    "lastName": "Moore",
+    "grade": "10th",
+    "email": "sophia.moore@email.com",
+    "phone": "(555) 789-0123",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 8,
+    "firstName": "Mason",
+    "lastName": "Taylor",
+    "grade": "10th",
+    "email": "mason.taylor@email.com",
+    "phone": "(555) 890-1234",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 9,
+    "firstName": "Isabella",
+    "lastName": "Anderson",
+    "grade": "10th",
+    "email": "isabella.anderson@email.com",
+    "phone": "(555) 901-2345",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 10,
+    "firstName": "Ethan",
+    "lastName": "Thomas",
+    "grade": "10th",
+    "email": "ethan.thomas@email.com",
+    "phone": "(555) 012-3456",
+    "enrollmentDate": "2024-08-15",
+    "status": "Active"
+  },
+  {
+    "Id": 11,
+    "firstName": "Mia",
+    "lastName": "Jackson",
+    "grade": "10th",
+    "email": "mia.jackson@email.com",
+    "phone": "(555) 123-4567",
+    "enrollmentDate": "2024-08-15",
+    "status": "Inactive"
+  },
+  {
+    "Id": 12,
+    "firstName": "James",
+    "lastName": "White",
+    "grade": "10th",
+    "email": "james.white@email.com",
+    "phone": "(555) 234-5678",
+    "enrollmentDate": "2024-08-15",
+    "status": "Graduated"
+  }
+]

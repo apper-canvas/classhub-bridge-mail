@@ -1,0 +1,146 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "assignmentId": 1,
+    "score": 92,
+    "submittedDate": "2024-09-14",
+    "comments": "Excellent work on algebra concepts"
+  },
+  {
+    "Id": 2,
+    "studentId": 2,
+    "assignmentId": 1,
+    "score": 88,
+    "submittedDate": "2024-09-14",
+    "comments": "Good understanding, minor calculation errors"
+  },
+  {
+    "Id": 3,
+    "studentId": 3,
+    "assignmentId": 1,
+    "score": 95,
+    "submittedDate": "2024-09-14",
+    "comments": "Perfect execution and clear solutions"
+  },
+  {
+    "Id": 4,
+    "studentId": 4,
+    "assignmentId": 1,
+    "score": 78,
+    "submittedDate": "2024-09-14",
+    "comments": "Needs more practice with linear equations"
+  },
+  {
+    "Id": 5,
+    "studentId": 5,
+    "assignmentId": 1,
+    "score": 85,
+    "submittedDate": "2024-09-14",
+    "comments": "Good effort, check work more carefully"
+  },
+  {
+    "Id": 6,
+    "studentId": 1,
+    "assignmentId": 2,
+    "score": 140,
+    "submittedDate": "2024-09-21",
+    "comments": "Outstanding lab report with detailed observations"
+  },
+  {
+    "Id": 7,
+    "studentId": 2,
+    "assignmentId": 2,
+    "score": 135,
+    "submittedDate": "2024-09-21",
+    "comments": "Very good analysis and conclusions"
+  },
+  {
+    "Id": 8,
+    "studentId": 3,
+    "assignmentId": 2,
+    "score": 145,
+    "submittedDate": "2024-09-21",
+    "comments": "Exceptional work with creative insights"
+  },
+  {
+    "Id": 9,
+    "studentId": 4,
+    "assignmentId": 2,
+    "score": 125,
+    "submittedDate": "2024-09-21",
+    "comments": "Good work, could use more detail in conclusion"
+  },
+  {
+    "Id": 10,
+    "studentId": 5,
+    "assignmentId": 2,
+    "score": 130,
+    "submittedDate": "2024-09-21",
+    "comments": "Well organized and thoughtful analysis"
+  },
+  {
+    "Id": 11,
+    "studentId": 1,
+    "assignmentId": 3,
+    "score": 89,
+    "submittedDate": "2024-09-24",
+    "comments": "Strong historical analysis with good sources"
+  },
+  {
+    "Id": 12,
+    "studentId": 2,
+    "assignmentId": 3,
+    "score": 82,
+    "submittedDate": "2024-09-24",
+    "comments": "Good content, work on essay structure"
+  },
+  {
+    "Id": 13,
+    "studentId": 3,
+    "assignmentId": 3,
+    "score": 94,
+    "submittedDate": "2024-09-24",
+    "comments": "Excellent research and compelling arguments"
+  },
+  {
+    "Id": 14,
+    "studentId": 6,
+    "assignmentId": 1,
+    "score": 91,
+    "submittedDate": "2024-09-14",
+    "comments": "Great work on problem solving"
+  },
+  {
+    "Id": 15,
+    "studentId": 7,
+    "assignmentId": 1,
+    "score": 87,
+    "submittedDate": "2024-09-14",
+    "comments": "Good understanding of concepts"
+  },
+  {
+    "Id": 16,
+    "studentId": 8,
+    "assignmentId": 1,
+    "score": 93,
+    "submittedDate": "2024-09-14",
+    "comments": "Excellent work with clear methodology"
+  },
+  {
+    "Id": 17,
+    "studentId": 9,
+    "assignmentId": 1,
+    "score": 76,
+    "submittedDate": "2024-09-14",
+    "comments": "Needs improvement in algebra basics"
+  },
+  {
+    "Id": 18,
+    "studentId": 10,
+    "assignmentId": 1,
+    "score": 89,
+    "submittedDate": "2024-09-14",
+    "comments": "Very good work with minor errors"
+  }
+]
