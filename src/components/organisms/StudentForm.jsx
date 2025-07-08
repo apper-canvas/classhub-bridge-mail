@@ -7,18 +7,18 @@ import { studentService } from '@/services/api/studentService'
 
 const StudentForm = ({ student = null, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
-    firstName: student?.firstName || '',
-    lastName: student?.lastName || '',
+    first_name: student?.first_name || '',
+    last_name: student?.last_name || '',
     grade: student?.grade || '',
     email: student?.email || '',
     phone: student?.phone || '',
     status: student?.status || 'Active',
-    parent1Name: student?.parent1Name || '',
-    parent1Phone: student?.parent1Phone || '',
-    parent1Email: student?.parent1Email || '',
-    parent2Name: student?.parent2Name || '',
-    parent2Phone: student?.parent2Phone || '',
-    parent2Email: student?.parent2Email || '',
+    parent1_name: student?.parent1_name || '',
+    parent1_phone: student?.parent1_phone || '',
+    parent1_email: student?.parent1_email || '',
+    parent2_name: student?.parent2_name || '',
+    parent2_phone: student?.parent2_phone || '',
+    parent2_email: student?.parent2_email || '',
   })
   const [loading, setLoading] = useState(false)
 
@@ -72,17 +72,17 @@ return (
         <div>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Student Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
+<Input
               label="First Name"
-              name="firstName"
-              value={formData.firstName}
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               required
             />
             <Input
               label="Last Name"
-              name="lastName"
-              value={formData.lastName}
+              name="last_name"
+              value={formData.last_name}
               onChange={handleChange}
               required
             />
@@ -133,26 +133,26 @@ return (
           <div className="space-y-4">
             <h4 className="text-md font-medium text-gray-700">Primary Parent/Guardian</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Input
+<Input
                 label="Parent Name"
-                name="parent1Name"
-                value={formData.parent1Name}
+                name="parent1_name"
+                value={formData.parent1_name}
                 onChange={handleChange}
                 placeholder="Full name"
               />
               <Input
                 label="Phone Number"
-                name="parent1Phone"
+                name="parent1_phone"
                 type="tel"
-                value={formData.parent1Phone}
+                value={formData.parent1_phone}
                 onChange={handleChange}
                 placeholder="(555) 123-4567"
               />
               <Input
                 label="Email Address"
-                name="parent1Email"
+                name="parent1_email"
                 type="email"
-                value={formData.parent1Email}
+                value={formData.parent1_email}
                 onChange={handleChange}
                 placeholder="parent@email.com"
               />
@@ -162,26 +162,26 @@ return (
           <div className="space-y-4 mt-6">
             <h4 className="text-md font-medium text-gray-700">Secondary Parent/Guardian (Optional)</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Input
+<Input
                 label="Parent Name"
-                name="parent2Name"
-                value={formData.parent2Name}
+                name="parent2_name"
+                value={formData.parent2_name}
                 onChange={handleChange}
                 placeholder="Full name"
               />
               <Input
                 label="Phone Number"
-                name="parent2Phone"
+                name="parent2_phone"
                 type="tel"
-                value={formData.parent2Phone}
+                value={formData.parent2_phone}
                 onChange={handleChange}
                 placeholder="(555) 123-4567"
               />
               <Input
                 label="Email Address"
-                name="parent2Email"
+                name="parent2_email"
                 type="email"
-                value={formData.parent2Email}
+                value={formData.parent2_email}
                 onChange={handleChange}
                 placeholder="parent@email.com"
               />
