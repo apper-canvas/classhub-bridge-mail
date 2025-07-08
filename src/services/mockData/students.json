@@ -7,9 +7,15 @@
     "email": "emma.johnson@email.com",
     "phone": "(555) 123-4567",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Michael Johnson",
+    "parent1Phone": "(555) 123-4567",
+    "parent1Email": "michael.johnson@email.com",
+    "parent2Name": "Sarah Johnson",
+    "parent2Phone": "(555) 123-4568",
+    "parent2Email": "sarah.johnson@email.com"
   },
-  {
+{
     "Id": 2,
     "firstName": "Liam",
     "lastName": "Williams",
@@ -17,9 +23,15 @@
     "email": "liam.williams@email.com",
     "phone": "(555) 234-5678",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "David Williams",
+    "parent1Phone": "(555) 234-5678",
+    "parent1Email": "david.williams@email.com",
+    "parent2Name": "Jennifer Williams",
+    "parent2Phone": "(555) 234-5679",
+    "parent2Email": "jennifer.williams@email.com"
   },
-  {
+{
     "Id": 3,
     "firstName": "Olivia",
     "lastName": "Brown",
@@ -27,9 +39,15 @@
     "email": "olivia.brown@email.com",
     "phone": "(555) 345-6789",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Robert Brown",
+    "parent1Phone": "(555) 345-6789",
+    "parent1Email": "robert.brown@email.com",
+    "parent2Name": "Lisa Brown",
+    "parent2Phone": "(555) 345-6790",
+    "parent2Email": "lisa.brown@email.com"
   },
-  {
+{
     "Id": 4,
     "firstName": "Noah",
     "lastName": "Davis",
@@ -37,9 +55,15 @@
     "email": "noah.davis@email.com",
     "phone": "(555) 456-7890",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Christopher Davis",
+    "parent1Phone": "(555) 456-7890",
+    "parent1Email": "christopher.davis@email.com",
+    "parent2Name": "Amanda Davis",
+    "parent2Phone": "(555) 456-7891",
+    "parent2Email": "amanda.davis@email.com"
   },
-  {
+{
     "Id": 5,
     "firstName": "Ava",
     "lastName": "Miller",
@@ -47,9 +71,15 @@
     "email": "ava.miller@email.com",
     "phone": "(555) 567-8901",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Kevin Miller",
+    "parent1Phone": "(555) 567-8901",
+    "parent1Email": "kevin.miller@email.com",
+    "parent2Name": "Michelle Miller",
+    "parent2Phone": "(555) 567-8902",
+    "parent2Email": "michelle.miller@email.com"
   },
-  {
+{
     "Id": 6,
     "firstName": "Lucas",
     "lastName": "Wilson",
@@ -57,9 +87,15 @@
     "email": "lucas.wilson@email.com",
     "phone": "(555) 678-9012",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Brian Wilson",
+    "parent1Phone": "(555) 678-9012",
+    "parent1Email": "brian.wilson@email.com",
+    "parent2Name": "Nicole Wilson",
+    "parent2Phone": "(555) 678-9013",
+    "parent2Email": "nicole.wilson@email.com"
   },
-  {
+{
     "Id": 7,
     "firstName": "Sophia",
     "lastName": "Moore",
@@ -67,9 +103,15 @@
     "email": "sophia.moore@email.com",
     "phone": "(555) 789-0123",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Richard Moore",
+    "parent1Phone": "(555) 789-0123",
+    "parent1Email": "richard.moore@email.com",
+    "parent2Name": "Patricia Moore",
+    "parent2Phone": "(555) 789-0124",
+    "parent2Email": "patricia.moore@email.com"
   },
-  {
+{
     "Id": 8,
     "firstName": "Mason",
     "lastName": "Taylor",
@@ -77,9 +119,15 @@
     "email": "mason.taylor@email.com",
     "phone": "(555) 890-1234",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "Steven Taylor",
+    "parent1Phone": "(555) 890-1234",
+    "parent1Email": "steven.taylor@email.com",
+    "parent2Name": "Karen Taylor",
+    "parent2Phone": "(555) 890-1235",
+    "parent2Email": "karen.taylor@email.com"
   },
-  {
+{
     "Id": 9,
     "firstName": "Isabella",
     "lastName": "Anderson",
@@ -87,9 +135,15 @@
     "email": "isabella.anderson@email.com",
     "phone": "(555) 901-2345",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "James Anderson",
+    "parent1Phone": "(555) 901-2345",
+    "parent1Email": "james.anderson@email.com",
+    "parent2Name": "Barbara Anderson",
+    "parent2Phone": "(555) 901-2346",
+    "parent2Email": "barbara.anderson@email.com"
   },
-  {
+{
     "Id": 10,
     "firstName": "Ethan",
     "lastName": "Thomas",
@@ -97,9 +151,15 @@
     "email": "ethan.thomas@email.com",
     "phone": "(555) 012-3456",
     "enrollmentDate": "2024-08-15",
-    "status": "Active"
+    "status": "Active",
+    "parent1Name": "William Thomas",
+    "parent1Phone": "(555) 012-3456",
+    "parent1Email": "william.thomas@email.com",
+    "parent2Name": "Susan Thomas",
+    "parent2Phone": "(555) 012-3457",
+    "parent2Email": "susan.thomas@email.com"
   },
-  {
+{
     "Id": 11,
     "firstName": "Mia",
     "lastName": "Jackson",
@@ -107,9 +167,15 @@
     "email": "mia.jackson@email.com",
     "phone": "(555) 123-4567",
     "enrollmentDate": "2024-08-15",
-    "status": "Inactive"
+    "status": "Inactive",
+    "parent1Name": "Charles Jackson",
+    "parent1Phone": "(555) 123-4567",
+    "parent1Email": "charles.jackson@email.com",
+    "parent2Name": "Helen Jackson",
+    "parent2Phone": "(555) 123-4568",
+    "parent2Email": "helen.jackson@email.com"
   },
-  {
+{
     "Id": 12,
     "firstName": "James",
     "lastName": "White",
@@ -117,6 +183,12 @@
     "email": "james.white@email.com",
     "phone": "(555) 234-5678",
     "enrollmentDate": "2024-08-15",
-    "status": "Graduated"
+    "status": "Graduated",
+    "parent1Name": "Thomas White",
+    "parent1Phone": "(555) 234-5678",
+    "parent1Email": "thomas.white@email.com",
+    "parent2Name": "Margaret White",
+    "parent2Phone": "(555) 234-5679",
+    "parent2Email": "margaret.white@email.com"
   }
 ]

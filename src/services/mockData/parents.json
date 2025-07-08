@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "type": "note",
+    "subject": "Parent-Teacher Conference",
+    "content": "Discussed Emma's progress in mathematics. Parents are supportive and willing to provide additional help at home.",
+    "date": "2024-12-01",
+    "contactMethod": "in-person"
+  },
+  {
+    "Id": 2,
+    "studentId": 1,
+    "type": "email",
+    "subject": "Homework Reminder",
+    "content": "Sent reminder about upcoming science project deadline to both parents.",
+    "date": "2024-12-03",
+    "contactMethod": "email"
+  },
+  {
+    "Id": 3,
+    "studentId": 2,
+    "type": "phone",
+    "subject": "Attendance Concern",
+    "content": "Called Mr. Williams regarding Liam's recent absences. Family had medical emergency, excused absences approved.",
+    "date": "2024-11-28",
+    "contactMethod": "phone"
+  },
+  {
+    "Id": 4,
+    "studentId": 3,
+    "type": "note",
+    "subject": "Academic Achievement",
+    "content": "Contacted parents to congratulate them on Olivia's excellent performance on recent exams.",
+    "date": "2024-12-02",
+    "contactMethod": "email"
+  },
+  {
+    "Id": 5,
+    "studentId": 4,
+    "type": "email",
+    "subject": "Behavioral Update",
+    "content": "Positive update on Noah's classroom participation and leadership skills development.",
+    "date": "2024-11-30",
+    "contactMethod": "email"
+  },
+  {
+    "Id": 6,
+    "studentId": 5,
+    "type": "phone",
+    "subject": "Assignment Discussion",
+    "content": "Discussed Ava's creative writing assignment with Mrs. Miller. Arranged for additional writing resources.",
+    "date": "2024-12-04",
+    "contactMethod": "phone"
+  }
+]
