@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { toast } from 'react-toastify'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
-import Badge from '@/components/atoms/Badge'
-import Select from '@/components/atoms/Select'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import Empty from '@/components/ui/Empty'
-import { studentService } from '@/services/api/studentService'
-import { attendanceService } from '@/services/api/attendanceService'
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isWeekend, isSameDay } from 'date-fns'
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { eachDayOfInterval, endOfMonth, format, isSameDay, isWeekend, startOfMonth } from "date-fns";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Select from "@/components/atoms/Select";
+import Button from "@/components/atoms/Button";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import { attendanceService } from "@/services/api/attendanceService";
+import { studentService } from "@/services/api/studentService";
 
 const Attendance = () => {
   const [students, setStudents] = useState([])
@@ -25,7 +25,7 @@ const Attendance = () => {
     try {
       setLoading(true)
       setError('')
-      const [studentsData, attendanceData] = await Promise.all([
+const [studentsData, attendanceData] = await Promise.all([
         studentService.getAll(),
         attendanceService.getAll()
       ])
@@ -48,18 +48,18 @@ const Attendance = () => {
     const todayRecords = attendance.filter(a => a.date === today)
     const todayData = {}
     todayRecords.forEach(record => {
-      todayData[record.studentId] = record.status
+todayData[record.student_id] = record.status
     })
     setTodayAttendance(todayData)
   }, [selectedDate, attendance])
 
   const getAttendanceForStudent = (studentId, date) => {
     const dateString = format(date, 'yyyy-MM-dd')
-    return attendance.find(a => a.studentId === studentId && a.date === dateString)
+return attendance.find(a => a.student_id === studentId && a.date === dateString)
   }
 
   const getAttendanceStats = (studentId) => {
-    const studentAttendance = attendance.filter(a => a.studentId === studentId)
+const studentAttendance = attendance.filter(a => a.student_id === studentId)
     const present = studentAttendance.filter(a => a.status === 'Present').length
     const total = studentAttendance.length
     return {
@@ -69,34 +69,33 @@ const Attendance = () => {
     }
   }
 
-  const handleAttendanceChange = (studentId, status) => {
+const handleAttendanceChange = (studentId, status) => {
     setTodayAttendance(prev => ({
       ...prev,
       [studentId]: status
     }))
   }
-
   const handleSaveAttendance = async () => {
     try {
       const today = format(selectedDate, 'yyyy-MM-dd')
       const promises = []
 
       for (const [studentId, status] of Object.entries(todayAttendance)) {
-        const existingRecord = attendance.find(a => 
-          a.studentId === parseInt(studentId) && a.date === today
+const existingRecord = attendance.find(a => 
+          a.student_id === parseInt(studentId) && a.date === today
         )
 
         const attendanceData = {
-          studentId: parseInt(studentId),
+student_id: parseInt(studentId),
           date: today,
           status,
           notes: ''
         }
 
         if (existingRecord) {
-          promises.push(attendanceService.update(existingRecord.Id, attendanceData))
+promises.push(attendanceService.update(existingRecord.Id, attendanceData))
         } else {
-          promises.push(attendanceService.create(attendanceData))
+promises.push(attendanceService.create(attendanceData))
         }
       }
 
@@ -199,12 +198,12 @@ const Attendance = () => {
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                       <span className="text-white font-medium">
-                        {student.firstName[0]}{student.lastName[0]}
+{student.first_name[0]}{student.last_name[0]}
                       </span>
                     </div>
                     <div>
                       <h3 className="font-medium text-gray-900">
-                        {student.firstName} {student.lastName}
+{student.first_name} {student.last_name}
                       </h3>
                       <p className="text-sm text-gray-500">{student.grade}</p>
                     </div>
@@ -283,12 +282,12 @@ const Attendance = () => {
                       <div className="flex items-center">
                         <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
                           <span className="text-white text-sm font-medium">
-                            {student.firstName[0]}{student.lastName[0]}
+{student.first_name[0]}{student.last_name[0]}
                           </span>
                         </div>
                         <div className="ml-3">
                           <div className="text-sm font-medium text-gray-900">
-                            {student.firstName} {student.lastName}
+{student.first_name} {student.last_name}
                           </div>
                         </div>
                       </div>

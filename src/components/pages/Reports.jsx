@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
-import Card from '@/components/atoms/Card'
-import Badge from '@/components/atoms/Badge'
-import StatCard from '@/components/molecules/StatCard'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import { studentService } from '@/services/api/studentService'
-import { gradeService } from '@/services/api/gradeService'
-import { attendanceService } from '@/services/api/attendanceService'
-import { assignmentService } from '@/services/api/assignmentService'
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import Students from "@/components/pages/Students";
+import Grades from "@/components/pages/Grades";
+import Attendance from "@/components/pages/Attendance";
+import StatCard from "@/components/molecules/StatCard";
+import { attendanceService } from "@/services/api/attendanceService";
+import { gradeService } from "@/services/api/gradeService";
+import { assignmentService } from "@/services/api/assignmentService";
+import { studentService } from "@/services/api/studentService";
 
 const Reports = () => {
   const [students, setStudents] = useState([])
@@ -25,7 +28,7 @@ const Reports = () => {
     try {
       setLoading(true)
       setError('')
-      const [studentsData, gradesData, attendanceData, assignmentsData] = await Promise.all([
+const [studentsData, gradesData, attendanceData, assignmentsData] = await Promise.all([
         studentService.getAll(),
         gradeService.getAll(),
         attendanceService.getAll(),
@@ -58,11 +61,11 @@ const Reports = () => {
     const presentCount = attendance.filter(a => a.status === 'Present').length
     const attendanceRate = attendance.length > 0 ? ((presentCount / attendance.length) * 100).toFixed(1) : 0
     
-    // Grade distribution
+// Grade distribution
     const gradeDistribution = grades.reduce((dist, grade) => {
-      const assignment = assignments.find(a => a.Id === grade.assignmentId)
+      const assignment = assignments.find(a => a.Id === grade.assignment_id)
       if (assignment) {
-        const percentage = (grade.score / assignment.totalPoints) * 100
+        const percentage = (grade.score / assignment.total_points) * 100
         if (percentage >= 90) dist.A++
         else if (percentage >= 80) dist.B++
         else if (percentage >= 70) dist.C++
@@ -83,13 +86,13 @@ const Reports = () => {
 
   const getStudentPerformance = () => {
     return students.map(student => {
-      const studentGrades = grades.filter(g => g.studentId === student.Id)
-      const studentAttendance = attendance.filter(a => a.studentId === student.Id)
+const studentGrades = grades.filter(g => g.student_id === student.Id)
+const studentAttendance = attendance.filter(a => a.student_id === student.Id)
       
       // Calculate GPA
       const totalPoints = studentGrades.reduce((sum, grade) => {
-        const assignment = assignments.find(a => a.Id === grade.assignmentId)
-        return sum + (assignment ? assignment.totalPoints : 0)
+const assignment = assignments.find(a => a.Id === grade.assignment_id)
+return sum + (assignment ? assignment.total_points : 0)
       }, 0)
       const totalScore = studentGrades.reduce((sum, grade) => sum + grade.score, 0)
       const gpa = totalPoints > 0 ? ((totalScore / totalPoints) * 100).toFixed(1) : 0
@@ -110,10 +113,10 @@ const Reports = () => {
 
   const getAssignmentAnalysis = () => {
     return assignments.map(assignment => {
-      const assignmentGrades = grades.filter(g => g.assignmentId === assignment.Id)
+const assignmentGrades = grades.filter(g => g.assignment_id === assignment.Id)
       const totalScore = assignmentGrades.reduce((sum, grade) => sum + grade.score, 0)
       const averageScore = assignmentGrades.length > 0 ? (totalScore / assignmentGrades.length).toFixed(1) : 0
-      const averagePercentage = assignmentGrades.length > 0 ? ((totalScore / (assignmentGrades.length * assignment.totalPoints)) * 100).toFixed(1) : 0
+const averagePercentage = assignmentGrades.length > 0 ? ((totalScore / (assignmentGrades.length * assignment.total_points)) * 100).toFixed(1) : 0
       
       return {
         ...assignment,
@@ -135,14 +138,14 @@ const Reports = () => {
       const studentData = getStudentPerformance()
       csvContent = 'Name,Grade,GPA,Attendance Rate,Total Grades,Status\n'
       studentData.forEach(student => {
-        csvContent += `"${student.firstName} ${student.lastName}","${student.grade}","${student.gpa}%","${student.attendanceRate}%","${student.totalGrades}","${student.status}"\n`
+csvContent += `"${student.first_name} ${student.last_name}","${student.grade}","${student.gpa}%","${student.attendanceRate}%","${student.totalGrades}","${student.status}"\n`
       })
       filename = 'student_performance_report.csv'
     } else if (type === 'assignments') {
       const assignmentData = getAssignmentAnalysis()
       csvContent = 'Assignment,Category,Total Points,Average Score,Average Percentage,Submissions\n'
-      assignmentData.forEach(assignment => {
-        csvContent += `"${assignment.title}","${assignment.category}","${assignment.totalPoints}","${assignment.averageScore}","${assignment.averagePercentage}%","${assignment.submissionCount}"\n`
+assignmentData.forEach(assignment => {
+csvContent += `"${assignment.title}","${assignment.category}","${assignment.total_points}","${assignment.averageScore}","${assignment.averagePercentage}%","${assignment.submissionCount}"\n`
       })
       filename = 'assignment_analysis_report.csv'
     }
@@ -279,11 +282,11 @@ const Reports = () => {
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
                         <span className="text-white text-sm font-medium">
-                          {student.firstName[0]}{student.lastName[0]}
+{student.first_name[0]}{student.last_name[0]}
                         </span>
                       </div>
                       <div>
-                        <p className="font-medium">{student.firstName} {student.lastName}</p>
+<p className="font-medium">{student.first_name} {student.last_name}</p>
                         <p className="text-sm text-gray-500">{student.grade}</p>
                       </div>
                     </div>
@@ -339,11 +342,11 @@ const Reports = () => {
                       <div className="flex items-center">
                         <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                           <span className="text-white font-medium">
-                            {student.firstName[0]}{student.lastName[0]}
+{student.first_name[0]}{student.last_name[0]}
                           </span>
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
+{student.first_name} {student.last_name}
                             {student.firstName} {student.lastName}
                           </div>
                           <div className="text-sm text-gray-500">
@@ -439,14 +442,14 @@ const Reports = () => {
                         {assignment.title}
                       </div>
                       <div className="text-sm text-gray-500">
-                        Due: {assignment.dueDate}
+Due: {assignment.due_date}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <Badge variant="secondary">{assignment.category}</Badge>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {assignment.totalPoints}
+{assignment.total_points}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {assignment.averageScore}

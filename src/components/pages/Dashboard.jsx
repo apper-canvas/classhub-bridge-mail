@@ -23,7 +23,7 @@ const Dashboard = () => {
       setLoading(true)
       setError('')
       
-      const [studentsData, gradesData, attendanceData, assignmentsData] = await Promise.all([
+const [studentsData, gradesData, attendanceData, assignmentsData] = await Promise.all([
         studentService.getAll(),
         gradeService.getAll(),
         attendanceService.getAll(),
@@ -67,17 +67,17 @@ const Dashboard = () => {
 
   const getRecentActivity = () => {
     // Get recent grades (last 5)
-    const recentGrades = grades
-      .sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate))
+const recentGrades = grades
+      .sort((a, b) => new Date(b.submitted_date) - new Date(a.submitted_date))
       .slice(0, 5)
       .map(grade => {
-        const student = students.find(s => s.Id === grade.studentId)
-        const assignment = assignments.find(a => a.Id === grade.assignmentId)
+        const student = students.find(s => s.Id === grade.student_id)
+        const assignment = assignments.find(a => a.Id === grade.assignment_id)
         return {
           id: grade.Id,
           type: 'grade',
-          message: `${student?.firstName} ${student?.lastName} scored ${grade.score} on ${assignment?.title}`,
-          time: grade.submittedDate,
+          message: `${student?.first_name} ${student?.last_name} scored ${grade.score} on ${assignment?.title}`,
+          time: grade.submitted_date,
           score: grade.score
         }
       })

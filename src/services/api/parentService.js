@@ -1,78 +1,290 @@
-import parentsData from '@/services/mockData/parents.json'
+import { toast } from 'react-toastify'
 
 class ParentService {
   constructor() {
-    this.communications = [...parentsData]
+    const { ApperClient } = window.ApperSDK
+    this.client = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    })
+    this.tableName = 'parent_communication'
   }
 
   async getAll() {
-    await this.delay(300)
-    return [...this.communications]
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "student_id" } },
+          { field: { Name: "type" } },
+          { field: { Name: "subject" } },
+          { field: { Name: "content" } },
+          { field: { Name: "date" } },
+          { field: { Name: "contact_method" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } },
+          { field: { Name: "CreatedOn" } },
+          { field: { Name: "CreatedBy" } },
+          { field: { Name: "ModifiedOn" } },
+          { field: { Name: "ModifiedBy" } }
+        ]
+      }
+
+      const response = await this.client.fetchRecords(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return []
+      }
+
+      return response.data || []
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching parent communications:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return []
+    }
   }
 
   async getById(id) {
-    await this.delay(200)
-    const communication = this.communications.find(c => c.Id === id)
-    if (!communication) {
-      throw new Error('Communication record not found')
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "student_id" } },
+          { field: { Name: "type" } },
+          { field: { Name: "subject" } },
+          { field: { Name: "content" } },
+          { field: { Name: "date" } },
+          { field: { Name: "contact_method" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } }
+        ]
+      }
+
+      const response = await this.client.getRecordById(this.tableName, id, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return null
+      }
+
+      return response.data
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching parent communication with ID ${id}:`, error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return null
     }
-    return { ...communication }
   }
 
   async getByStudentId(studentId) {
-    await this.delay(250)
-    const studentCommunications = this.communications.filter(c => c.studentId === studentId)
-    return [...studentCommunications]
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "student_id" } },
+          { field: { Name: "type" } },
+          { field: { Name: "subject" } },
+          { field: { Name: "content" } },
+          { field: { Name: "date" } },
+          { field: { Name: "contact_method" } }
+        ],
+        where: [
+          {
+            FieldName: "student_id",
+            Operator: "EqualTo",
+            Values: [studentId]
+          }
+        ]
+      }
+
+      const response = await this.client.fetchRecords(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return []
+      }
+
+      return response.data || []
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching communications for student ${studentId}:`, error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return []
+    }
   }
 
   async create(communicationData) {
-    await this.delay(400)
-    const newCommunication = {
-      ...communicationData,
-      Id: Math.max(...this.communications.map(c => c.Id)) + 1,
-      date: new Date().toISOString().split('T')[0]
+    try {
+      const params = {
+        records: [{
+          Name: communicationData.Name || communicationData.subject,
+          student_id: parseInt(communicationData.student_id),
+          type: communicationData.type,
+          subject: communicationData.subject,
+          content: communicationData.content,
+          date: communicationData.date || new Date().toISOString().split('T')[0],
+          contact_method: communicationData.contact_method,
+          Tags: communicationData.Tags,
+          Owner: communicationData.Owner
+        }]
+      }
+
+      const response = await this.client.createRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return null
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success)
+        const failedRecords = response.results.filter(result => !result.success)
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create ${failedRecords.length} parent communications:${JSON.stringify(failedRecords)}`)
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`)
+            })
+            if (record.message) toast.error(record.message)
+          })
+        }
+        
+        return successfulRecords.length > 0 ? successfulRecords[0].data : null
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating parent communication:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return null
     }
-    this.communications.push(newCommunication)
-    return { ...newCommunication }
   }
 
   async update(id, communicationData) {
-    await this.delay(400)
-    const index = this.communications.findIndex(c => c.Id === id)
-    if (index === -1) {
-      throw new Error('Communication record not found')
+    try {
+      const params = {
+        records: [{
+          Id: id,
+          Name: communicationData.Name || communicationData.subject,
+          student_id: parseInt(communicationData.student_id),
+          type: communicationData.type,
+          subject: communicationData.subject,
+          content: communicationData.content,
+          date: communicationData.date,
+          contact_method: communicationData.contact_method,
+          Tags: communicationData.Tags,
+          Owner: communicationData.Owner
+        }]
+      }
+
+      const response = await this.client.updateRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return null
+      }
+
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success)
+        const failedUpdates = response.results.filter(result => !result.success)
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update ${failedUpdates.length} parent communications:${JSON.stringify(failedUpdates)}`)
+          
+          failedUpdates.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`)
+            })
+            if (record.message) toast.error(record.message)
+          })
+        }
+        
+        return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating parent communication:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return null
     }
-    this.communications[index] = { ...this.communications[index], ...communicationData }
-    return { ...this.communications[index] }
   }
 
   async delete(id) {
-    await this.delay(300)
-    const index = this.communications.findIndex(c => c.Id === id)
-    if (index === -1) {
-      throw new Error('Communication record not found')
+    try {
+      const params = {
+        RecordIds: [id]
+      }
+
+      const response = await this.client.deleteRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        toast.error(response.message)
+        return false
+      }
+
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success)
+        const failedDeletions = response.results.filter(result => !result.success)
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete ${failedDeletions.length} parent communications:${JSON.stringify(failedDeletions)}`)
+          
+          failedDeletions.forEach(record => {
+            if (record.message) toast.error(record.message)
+          })
+        }
+        
+        return successfulDeletions.length > 0
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting parent communication:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return false
     }
-    this.communications.splice(index, 1)
-    return true
   }
 
   async addNote(studentId, noteData) {
-    await this.delay(350)
-    const newNote = {
-      studentId: parseInt(studentId),
-      type: 'note',
-      subject: noteData.subject,
-      content: noteData.content,
-      contactMethod: noteData.contactMethod || 'note',
-      Id: Math.max(...this.communications.map(c => c.Id)) + 1,
-      date: new Date().toISOString().split('T')[0]
-    }
-    this.communications.push(newNote)
-    return { ...newNote }
-  }
+    try {
+      const communicationData = {
+        student_id: parseInt(studentId),
+        type: 'note',
+        subject: noteData.subject,
+        content: noteData.content,
+        contact_method: noteData.contact_method || 'note',
+        date: new Date().toISOString().split('T')[0]
+      }
 
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
+      return await this.create(communicationData)
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error adding note:", error?.response?.data?.message)
+      } else {
+        console.error(error.message)
+      }
+      return null
+    }
   }
 }
 

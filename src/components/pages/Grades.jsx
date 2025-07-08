@@ -1,18 +1,23 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { toast } from 'react-toastify'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
-import Badge from '@/components/atoms/Badge'
-import Input from '@/components/atoms/Input'
-import Modal from '@/components/molecules/Modal'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import Empty from '@/components/ui/Empty'
-import AssignmentForm from '@/components/organisms/AssignmentForm'
-import { studentService } from '@/services/api/studentService'
-import { assignmentService } from '@/services/api/assignmentService'
-import { gradeService } from '@/services/api/gradeService'
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import AssignmentForm from "@/components/organisms/AssignmentForm";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import Modal from "@/components/molecules/Modal";
+import assignmentsData from "@/services/mockData/assignments.json";
+import parentsData from "@/services/mockData/parents.json";
+import attendanceData from "@/services/mockData/attendance.json";
+import gradesData from "@/services/mockData/grades.json";
+import studentsData from "@/services/mockData/students.json";
+import { gradeService } from "@/services/api/gradeService";
+import { assignmentService } from "@/services/api/assignmentService";
+import { studentService } from "@/services/api/studentService";
 
 const Grades = () => {
   const [students, setStudents] = useState([])
@@ -24,7 +29,7 @@ const Grades = () => {
   const [selectedAssignment, setSelectedAssignment] = useState(null)
   const [gradeInputs, setGradeInputs] = useState({})
 
-  const loadData = async () => {
+const loadData = async () => {
     try {
       setLoading(true)
       setError('')
@@ -48,7 +53,7 @@ const Grades = () => {
   }, [])
 
   const getGradeForStudent = (studentId, assignmentId) => {
-    return grades.find(g => g.studentId === studentId && g.assignmentId === assignmentId)
+return grades.find(g => g.student_id === studentId && g.assignment_id === assignmentId)
   }
 
   const getGradeColor = (score, totalPoints) => {
@@ -71,39 +76,39 @@ const Grades = () => {
     return 'F'
   }
 
-  const handleGradeInput = (studentId, assignmentId, value) => {
+const handleGradeInput = (studentId, assignmentId, value) => {
     const key = `${studentId}-${assignmentId}`
     setGradeInputs(prev => ({
       ...prev,
       [key]: value
-    }))
+}))
   }
 
   const handleGradeSubmit = async (studentId, assignmentId) => {
     const key = `${studentId}-${assignmentId}`
     const score = parseFloat(gradeInputs[key])
-    const assignment = assignments.find(a => a.Id === assignmentId)
+const assignment = assignments.find(a => a.Id === assignmentId)
     
-    if (isNaN(score) || score < 0 || score > assignment.totalPoints) {
-      toast.error(`Score must be between 0 and ${assignment.totalPoints}`)
+if (isNaN(score) || score < 0 || score > assignment.total_points) {
+toast.error(`Score must be between 0 and ${assignment.total_points}`)
       return
     }
 
     try {
       const existingGrade = getGradeForStudent(studentId, assignmentId)
       const gradeData = {
-        studentId,
-        assignmentId,
+student_id: studentId,
+        assignment_id: assignmentId,
         score,
-        submittedDate: new Date().toISOString().split('T')[0],
+submitted_date: new Date().toISOString().split('T')[0],
         comments: ''
       }
 
-      if (existingGrade) {
+if (existingGrade) {
         await gradeService.update(existingGrade.Id, gradeData)
         toast.success('Grade updated successfully!')
       } else {
-        await gradeService.create(gradeData)
+await gradeService.create(gradeData)
         toast.success('Grade added successfully!')
       }
 
@@ -132,9 +137,11 @@ const Grades = () => {
   const handleDeleteAssignment = async (assignmentId) => {
     if (window.confirm('Are you sure you want to delete this assignment? All grades for this assignment will be lost.')) {
       try {
-        // Delete all grades for this assignment first
-        const assignmentGrades = grades.filter(g => g.assignmentId === assignmentId)
-        await Promise.all(assignmentGrades.map(grade => gradeService.delete(grade.Id)))
+// Delete all grades for this assignment first
+        const assignmentGrades = grades.filter(g => g.assignment_id === assignmentId)
+        for (const grade of assignmentGrades) {
+          await gradeService.delete(grade.Id)
+        }
         
         // Then delete the assignment
         await assignmentService.delete(assignmentId)
@@ -208,8 +215,8 @@ const Grades = () => {
                             </button>
                           </div>
 </div>
-                        <div className="text-xs text-gray-400">
-                          {assignment.totalPoints} pts • {assignment.weight}%
+<div className="text-xs text-gray-400">
+                          {assignment.total_points} pts • {assignment.weight}%
                         </div>
                         <Badge variant="info" size="sm">
                           {assignment.category}
@@ -224,16 +231,16 @@ const Grades = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
 {students.map((student, index) => {
-                  const studentGrades = grades.filter(g => g.studentId === student.Id)
+const studentGrades = grades.filter(g => g.student_id === student.Id)
                   
                   // Calculate weighted average
                   let weightedSum = 0
                   let totalWeight = 0
                   
                   studentGrades.forEach(grade => {
-                    const assignment = assignments.find(a => a.Id === grade.assignmentId)
+const assignment = assignments.find(a => a.Id === grade.assignment_id)
                     if (assignment && assignment.weight) {
-                      const percentage = (grade.score / assignment.totalPoints) * 100
+const percentage = (grade.score / assignment.total_points) * 100
                       weightedSum += percentage * (assignment.weight / 100)
                       totalWeight += assignment.weight / 100
                     }
@@ -252,12 +259,12 @@ const Grades = () => {
                         <div className="flex items-center">
                           <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
                             <span className="text-white text-sm font-medium">
-                              {student.firstName[0]}{student.lastName[0]}
+{student.first_name[0]}{student.last_name[0]}
                             </span>
                           </div>
                           <div className="ml-3">
                             <div className="text-sm font-medium text-gray-900">
-                              {student.firstName} {student.lastName}
+{student.first_name} {student.last_name}
                             </div>
                             <div className="text-xs text-gray-500">
                               {student.grade}
@@ -273,12 +280,12 @@ const Grades = () => {
                             {grade ? (
                               <div className="space-y-1">
                                 <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                  getGradeColor(grade.score, assignment.totalPoints)
+getGradeColor(grade.score, assignment.total_points)
                                 }`}>
-                                  {grade.score}/{assignment.totalPoints}
+{grade.score}/{assignment.total_points}
                                 </div>
                                 <div className="text-xs text-gray-500">
-                                  {getGradeLetter(grade.score, assignment.totalPoints)}
+{getGradeLetter(grade.score, assignment.total_points)}
                                 </div>
                               </div>
                             ) : (
@@ -290,7 +297,7 @@ const Grades = () => {
                                   onChange={(e) => handleGradeInput(student.Id, assignment.Id, e.target.value)}
                                   className="w-20 h-8 text-center text-xs"
                                   min="0"
-                                  max={assignment.totalPoints}
+max={assignment.total_points}
                                 />
                                 <Button
                                   size="sm"
