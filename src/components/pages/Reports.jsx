@@ -338,16 +338,16 @@ csvContent += `"${assignment.title}","${assignment.category}","${assignment.tota
                     transition={{ delay: index * 0.05 }}
                     className="table-row"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap">
+<td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                           <span className="text-white font-medium">
-{student.first_name[0]}{student.last_name[0]}
+                            {student.first_name[0]}{student.last_name[0]}
                           </span>
                         </div>
                         <div className="ml-4">
-{student.first_name} {student.last_name}
-                            {student.firstName} {student.lastName}
+                          <div className="text-sm font-medium text-gray-900">
+                            {student.first_name} {student.last_name}
                           </div>
                           <div className="text-sm text-gray-500">
                             {student.email}
